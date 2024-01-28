@@ -1,4 +1,4 @@
-
+from core.keyboards.reply import reply_keyboard
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import Message
 import asyncio
@@ -19,8 +19,7 @@ async def get_start(message: Message, bot: Bot):
 
     await set_commands(bot)
     await bot.send_message(message.from_user.id, f'Hello, {message.from_user.first_name}, dai 35 grn')
-    await message.answer(f'sorry, {message.from_user.first_name}, nema zdachi')
-    await message.reply(f'Privat? {message.from_user.first_name}, idi nahuy')
+    await message.reply(f'Privat? {message.from_user.first_name}, idi nahuy', reply_markup=reply_keyboard)
 
 
 async def start():
