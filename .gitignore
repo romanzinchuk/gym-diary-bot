@@ -1,7 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,pycharm,venv,dotenv
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,pycharm,venv,dotenv
-<<<<<<< HEAD
-.idea
+../.idea
 
 .idea/
 
@@ -52,7 +51,7 @@
 # .idea/modules
 # *.iml
 # *.ipr
-
+.DS_Store
 # CMake
 cmake-build-*/
 
