@@ -1,10 +1,10 @@
-from core.keyboards.reply import reply_keyboard
-from aiogram import Bot, Dispatcher, types
-from aiogram.types import Message
+from core.handlers.basic import get_start
+from aiogram import Bot, Dispatcher, MagicFilter, F
+from aiogram.filters import Command
 import asyncio
 import os
 from dotenv import load_dotenv
-from core.utils.commands import set_commands
+from core.handlers.basic import get_new_workout, get_privat
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
@@ -14,19 +14,16 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 bot = Bot(BOT_TOKEN)
 dp = Dispatcher()
 
-
-async def get_start(message: Message, bot: Bot):
-
-    await set_commands(bot)
-    await bot.send_message(message.from_user.id, f'Hello, {message.from_user.first_name}, dai 35 grn')
-    await message.reply(f'Privat? {message.from_user.first_name}, idi nahuy', reply_markup=reply_keyboard)
-
-
 async def start():
 
     bot = Bot(BOT_TOKEN)
     dp = Dispatcher()
-    dp.message.register(get_start)
+
+    dp.message.register(get_start, Command(commands='start'))
+    dp.message.register(get_new_workout, Command(commands='new'))
+    dp.message.register(get_privat, F.text == 'Можна на приват кинути?')
+
+
     try:
         await dp.start_polling(bot)
     finally:
